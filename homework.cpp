@@ -1,80 +1,44 @@
 #include <iostream>
-#include<cmath>
 #include "Helpers.h"
+#include <array>
 
-Stack::Stack() 
+void Animal::Voice()
 {
-    // initialize stack to be empty
-    top = NULL;
+    std::cout << "animal sound!" << std::endl;
 };
 
-Stack::~Stack() 
+void Dog::Voice()
 {
-    // deconstractor to delete all of the dynamic variables
-    while (!isEmpty())
-        pop();
+    std::cout << "Woof!" << std::endl;
 };
 
-void Stack::push(std::string d) 
+void Cat::Voice()
 {
-    // need a new node to store data d in
-    Node *temp = new Node();
-    temp->data = d;
-    temp->next = top; // point the new node's next to the new top of the stack
-    top = temp; // point top to the new top of the stack
+    std::cout << "Mew!" << std::endl;
 };
 
-std::string Stack::pop() 
+void Rabbit::Voice()
 {
-    if (!isEmpty())
-    {
-        std::string value = top->data;
-        Node *oldtop = top;
-        top = oldtop->next;
-        delete oldtop;
-        return value;
-    }
-    else
-    {
-        // you can't pop from an empty stack
-        std::cout << "You can't pop from an empty stack!" << std::endl;
-        exit(1);
-    }
- };
-
-bool Stack::isEmpty()
-{
-    return (top == NULL);
-};
-
-std::string Stack::toString() 
-{
-    std::string result = "(top) -> ";
-    if (isEmpty())
-    {
-        return result + "NULL";
-    }
-    else 
-    {
-        Node *current = top;
-        while (current != NULL)
-        {
-            result += (current->data + " -> ");
-            current = current->next;
-        }
-    }
-    return result + "END";
+    std::cout << "Hiss!" << std::endl;
 };
 
 int main()
 {
-    Stack *s = new Stack();
-    s->push("Cheeseburger");
-    s->push("Pizza");
-    s->push("Large coffee");
-    s->pop();
-    std::cout << s->toString() << std::endl;
-    delete s;
+    Animal* dog = new Dog();
+    Animal* cat = new Cat();
+    Animal* rabbit = new Rabbit();
+
+    Animal* array[3] = { dog, cat, rabbit };
+
+    for  (int i = 0; i < 3; i++)
+    {
+        array[i]->Voice();
+    };
+
+    delete dog;
+    delete cat;
+    delete rabbit;
+    delete [] array;
 
     return 0;
 };
