@@ -11,12 +11,9 @@ void print()
 
 void printNums(bool even, int n) {
 
-    for (int i = 1; i <= n; i++)
+    for (int i = even ? 2 : 1; i <= n; i+=2)
     {
-        if (even ? i % 2 == 0 : i % 2 != 0)
-        {
-            std::cout << i << "\n";
-        }
+         std::cout << i << "\n";
     }
 }
 
@@ -94,7 +91,8 @@ int main()
         }
     }
 
-    printNums(false, 10);
+    std::cout << "Print numbers \n";
+    printNums(true, 10);
 
     int array[5][5];
 
